@@ -15,10 +15,11 @@ namespace AppIconGenerator {
             int height = Math.Min(maxHeight, sourceBitmap.Height);
             int width = Math.Min(maxWidth, sourceBitmap.Width);
 
-            using SKBitmap scaledBitmap = sourceBitmap.Resize(new SKImageInfo(width, height), quality);
-            using SKImage scaledImage = SKImage.FromBitmap(scaledBitmap);
-            using SKData data = scaledImage.Encode();
 
+            using SKBitmap scaledBitmap = sourceBitmap.Resize(new SKImageInfo(width, height, SKColorType.Bgra8888, SKAlphaType.Unpremul), quality);
+            
+            using SKImage scaledImage = SKImage.FromBitmap(scaledBitmap);            
+            using SKData data = scaledImage.Encode();
             return (data.ToArray(), height, width);
         }
     }
